@@ -22,4 +22,5 @@ By default, an image of the MNIST dataset is used, interpreted as a 2d-signal an
   
 
 Example:
+
 ```$ main.py image.jpg 1 20```
