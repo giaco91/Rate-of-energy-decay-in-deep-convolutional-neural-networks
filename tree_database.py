@@ -12,28 +12,36 @@ from scatteringtree import scattering_tree
 
 def get_n2d_filters():
     filter_list=[]
-    n=int(sys.argv[3])
+    n=1
+    if len(sys.argv)>1:
+        n=int(sys.argv[3])
     for i in range(n-1):
         filter_list.append([gwt(2, 2, filter_num_rows=2**(n-i), filter_num_columns=2**(n-i))])
     return filter_list
 
 def get_n1d_filters():
     filter_list=[]
-    n=int(sys.argv[3])
+    n=1
+    if len(sys.argv)>1:
+        n=int(sys.argv[3])
     for i in range(n-1):
         filter_list.append([swt1(wavelet='db1', level=1, start_level=0, frequency_decreasing_path=False)])
     return filter_list
 
 def get_n2d_poolings():
     pooling_list=[]
-    n=int(sys.argv[3])
+    n=1
+    if len(sys.argv)>1:
+        n=int(sys.argv[3])
     for i in range(n-1):
         pooling_list.append(pooling((2,2), np.max))
     return pooling_list
 
 def get_n1d_poolings():
     pooling_list=[]
-    n=int(sys.argv[3])
+    n=1
+    if len(sys.argv)>1:
+        n=int(sys.argv[3])
     for i in range(n-1):
         pooling_list.append(pooling(2, np.max))
     return pooling_list
