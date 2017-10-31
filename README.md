@@ -20,7 +20,7 @@ By default, an image of the MNIST dataset is used, interpreted as a 2d-signal an
   
   3. Pass any number from ``` 1 ``` to ``` 200 ``` to choose the amount of layers.
   
-
+Note that the order of the arguments is important and that you can pass either all arguments or none.
 Example:
 
 ```$ main.py image.jpg 1 20```
