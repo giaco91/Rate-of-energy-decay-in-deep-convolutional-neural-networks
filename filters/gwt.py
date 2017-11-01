@@ -1,5 +1,6 @@
 #coding: utf-8
 import numpy as np
+import matplotlib.pyplot as plt
 from skimage.io import imshow, show
 import matplotlib.pyplot as plt
 from inspect import isfunction
@@ -129,8 +130,9 @@ def _gwt(img, meta, num_scales, num_rotations, phi_filter, psi_filter_bank, out_
     """
 
     prop = []
+    # imgplot = plt.imshow(img)
+    # plt.show()
     inp_img = np.fft.fftshift(np.fft.fft2(np.fft.ifftshift(img)))
-    
     #output for the feature vector
     if out_filter==None:
         out = []

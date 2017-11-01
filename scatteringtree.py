@@ -95,6 +95,8 @@ def _scatter(signal, propagation_filters, nonlinearities, poolings):
             #sc is a dictionary with keys: prop,out,meta
             #in prop there are all scattered signals of the node
             output.extend(sc['out'])
+            # if i>=2:
+            #     print(sc['prop'])
             next_nodes.extend(sc['prop'])#das sind die propagierten signale
             e+=get_energy(sc['prop'])
             next_meta.extend(sc['meta'])
@@ -177,7 +179,7 @@ def scatter_single_node(signal, propagation_filters, nonlinearity, pooling, meta
             if type(res) is dict:
                 #res is a dictionary with prop,out,meta as keys
                 filtered.extend(res['prop'])
-                
+                #print(res['prop'])
                 if 'out' in res:
                     output.extend(res['out'])
                 
