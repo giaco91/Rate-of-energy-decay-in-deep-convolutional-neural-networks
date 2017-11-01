@@ -26,15 +26,25 @@ Example:
 ```$ python main.py image.jpg 1 8```
 
 Esample output:
+
 `preprocessing your signal in 1-dimension...
+
 Total propagated energy at:
+
 level  1 :  552907215.611
+
 level  2 :  153676110.639
+
 level  3 :  37964433.8056
+
 level  4 :  8962932.84722
+
 level  5 :  2214675.10764
+
 level  6 :  547426.286458
+
 level  7 :  142753.263021
+
 level  8 :  34595.3559028`
 
 
