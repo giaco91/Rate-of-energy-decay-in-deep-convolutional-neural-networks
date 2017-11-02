@@ -75,12 +75,9 @@ def _scatter(signal, propagation_filters, nonlinearities, poolings):
     # This should allow for multiple input signals (as a list) such as R,G,B channels of an image.
     if type(signal) is list:
         nodes.extend(signal)
-        #print("is list")
     else:
         nodes.append(signal)
-        #print("is no list")
     meta = [None]*len(nodes)
-
     #scatter the tree up to second last layer
     #len(propagation_filters) must equal the amount of levels
     energies=np.zeros(len(propagation_filters))
@@ -95,8 +92,6 @@ def _scatter(signal, propagation_filters, nonlinearities, poolings):
             #sc is a dictionary with keys: prop,out,meta
             #in prop there are all scattered signals of the node
             output.extend(sc['out'])
-            # if i>=2:
-            #     print(sc['prop'])
             next_nodes.extend(sc['prop'])#das sind die propagierten signale
             e+=get_energy(sc['prop'])
             next_meta.extend(sc['meta'])
@@ -179,7 +174,6 @@ def scatter_single_node(signal, propagation_filters, nonlinearity, pooling, meta
             if type(res) is dict:
                 #res is a dictionary with prop,out,meta as keys
                 filtered.extend(res['prop'])
-                #print(res['prop'])
                 if 'out' in res:
                     output.extend(res['out'])
                 
@@ -204,12 +198,10 @@ def scatter_single_node(signal, propagation_filters, nonlinearity, pooling, meta
     
     if nonlinearity is not None:
         filtered = [nonlinearity(x) for x in filtered]
-    
     if pooling is None:
         pooled = filtered
     else:
-        pooled = [pooling.apply_pooling(x) for x in filtered]
-        
+        pooled = [pooling.apply_pooling(x) for x in filtered]   
     return {'prop': pooled, 'out': output, 'meta': new_meta}
 
 def get_energy(signals):

@@ -128,11 +128,12 @@ def _gwt(img, meta, num_scales, num_rotations, phi_filter, psi_filter_bank, out_
                                     y['meta'][i] is the number of the scale that filtered y['prop'][i]
         
     """
-
     prop = []
     # imgplot = plt.imshow(img)
     # plt.show()
     inp_img = np.fft.fftshift(np.fft.fft2(np.fft.ifftshift(img)))
+    # imgplot = plt.imshow(np.absolute(inp_img))
+    # plt.show()
     #output for the feature vector
     if out_filter==None:
         out = []
@@ -166,7 +167,7 @@ def _gwt(img, meta, num_scales, num_rotations, phi_filter, psi_filter_bank, out_
             prop_img = inp_img*psi_filter_bank[i][j]
             prop_img = np.fft.fftshift(np.fft.ifft2(np.fft.ifftshift(prop_img)))
             prop.extend([prop_img])
-            m = {'scale': i}
+            m = {'scale': i+1}
             new_meta.extend([m])
 
     return {'prop': prop, 'out': out, 'meta': new_meta}
