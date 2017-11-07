@@ -10,7 +10,7 @@ Make sure you have preinstalled the following:
   - scikit-learn:   http://scikit-learn.org/stable/install.html
   - SciPy:    https://www.scipy.org/install.html
   
-Then you can simply run the e.g. from your terminal:
+Then you can simply run the code e.g. from your terminal:
 ```$ python main.py ```
 
 By default, an image of the MNIST dataset is used, interpreted as a 2d-signal and scattered over 10 layers. However, you can pass three arguments as described above:
