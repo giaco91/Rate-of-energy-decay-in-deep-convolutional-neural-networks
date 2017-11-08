@@ -56,7 +56,14 @@ level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
 ## Run 1dDecay.py
 
-Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only in the positive or the negative frequency regime. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one images is scattered. The highpass filters are arranged dyadic with the largest bandwith at the high-frequency end.
+Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only in the positive or the negative frequency regime. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one images is scattered. The highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
+
+```$ python 1dDecay.py ```
+
+There are 3 additional arguments that can be passed: 
+
+1. Integer: How many images do you want to scatter? The output energies at each level will be averaged over the images.
+2. Integer {2,6,18}: How many dyadic filters do you want to have at each node? Note that the calculation time scales like: levels^filters. Usaually running out of ram will be the bigger issue here.
 
 
 
