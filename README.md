@@ -56,7 +56,7 @@ level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
 ## Run 1dDecay.py
 
-Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only in the positive or the negative frequency regime. The input signals are unrolled MNIST digit images of size 32*32=1024. 
+Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only in the positive or the negative frequency regime. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one images is scattered. The highpass filters are arranged dyadic with the largest bandwith at the high-frequency end.
 
 
 
