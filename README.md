@@ -1,14 +1,18 @@
 # Rate-of-energy-decay-in-deep-convolutional-neural-networks
 Experiments on the energy decay of the propagated signals in deep convolutional neural networks.
 
-The goal of this repo is to serve a python file, that implements a deep convolutaional neural network with a certain set of well chosen filters. The user can pass any image of any size, choose, whether it should be interpreted as a 1-d or a 2-d signal, and finally decide how many layers are desired.
+The goal of this repo is to serve a python file, that implements a deep convolutaional neural network with a certain set of well chosen filters. 
 
-## Run main.py
+## Preinstallations
 
 Make sure you have preinstalled the following:
 
   - scikit-learn:   http://scikit-learn.org/stable/install.html
   - SciPy:    https://www.scipy.org/install.html
+
+## Run main.py
+
+The user can pass any image of any size, choose, whether it should be interpreted as a 1-d or a 2-d signal, and finally decide how many layers are desired.
   
 Then you can simply run the code e.g. from your terminal:
 ```$ python main.py ```
