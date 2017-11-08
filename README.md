@@ -1,7 +1,7 @@
 # Rate-of-energy-decay-in-deep-convolutional-neural-networks
 Experiments on the energy decay of the propagated signals in deep convolutional neural networks.
 
-The goal of this repo is to serve a python file, that implements a deep convolutaional neural network with a certain set of well chosen filters. 
+The goal of this repo is to serve a python files, that implement a deep convolutaional neural networks with certain sets of well chosen filters. 
 
 ## Preinstallations
 
