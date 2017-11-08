@@ -26,13 +26,13 @@ By default, an image of the MNIST dataset is used, interpreted as a 2d-signal an
   
 Note that the order of the arguments is important and that you can pass either all arguments or none. The used filters are stationary wavelets in 1d and Gabor wavelets in the 2d case.
 
-Example input:
+### Example input:
 
 ```$ python main.py image.jpg 1 8```
 
-Example output:
+### Example output: 
 
-`preprocessing your signal in 1-dimension...
+preprocessing your signal in 1-dimension...
 
 Propagation protocol:
 
@@ -52,6 +52,6 @@ level  6 : - Energy: 34961046.2309 , Amount of signals: 32 , Signal size: 16384
 
 level  7 : - Energy: 16437425.9316 , Amount of signals: 64 , Signal size: 8192
 
-level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096`
+level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
 
