@@ -36,22 +36,22 @@ Example output:
 
 Propagation protocol:
 
-level  0 : Energy: 25861707617.3  Amount of signals: 1  Signal size: 1048576
+level  0 : - Energy: 25861707617.3 , Amount of signals: 1 , Signal size: 1048576
 
-level  1 : Energy: 1280520894.14  Amount of signals: 1  Signal size: 524288
+level  1 : - Energy: 1280520894.14 , Amount of signals: 1 , Signal size: 524288
 
-level  2 : Energy: 673823174.618  Amount of signals: 2  Signal size: 262144
+level  2 : - Energy: 673823174.618 , Amount of signals: 2 , Signal size: 262144
 
-level  3 : Energy: 324803150.41  Amount of signals: 4  Signal size: 131072
+level  3 : - Energy: 324803150.41 , Amount of signals: 4 , Signal size: 131072
 
-level  4 : Energy: 152369874.5  Amount of signals: 8  Signal size: 65536
+level  4 : - Energy: 152369874.5 , Amount of signals: 8 , Signal size: 65536
 
-level  5 : Energy: 72621136.4797  Amount of signals: 16  Signal size: 32768
+level  5 : - Energy: 72621136.4797 , Amount of signals: 16 , Signal size: 32768
 
-level  6 : Energy: 34961046.2309  Amount of signals: 32  Signal size: 16384
+level  6 : - Energy: 34961046.2309 , Amount of signals: 32 , Signal size: 16384
 
-level  7 : Energy: 16437425.9316  Amount of signals: 64  Signal size: 8192
+level  7 : - Energy: 16437425.9316 , Amount of signals: 64 , Signal size: 8192
 
-level  8 : Energy: 7385179.14625  Amount of signals: 128  Signal size: 4096`
+level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096`
 
 
