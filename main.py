@@ -59,7 +59,6 @@ def mnist_to_img(data):
 
 def run_test():
 
-    
     if len(sys.argv)!=4:
         print('You passed no image. Using an image from the MNIST dataset.')
         run_mnist()    
@@ -74,8 +73,12 @@ def run_test():
             print('preprocessing your signal in 2-dimension...')
             image = imresize(image, (size, size), interp='bilinear')
             print('Scattering training data...')
-            sct = tree_database.var_2d_filter
-            sct.transform(image)
+            sct = tree_database.var_2d_filters
+            out=sct.transform(image)
+            energies=out['energies']
+            amount_of_props=out['amount']
+            size_of_props=out['size']
+            print_energy(energies,amount_of_props,size_of_props)
         elif int(sys.argv[2])==1:
             print('preprocessing your signal in 1-dimension...')
             shape=image.shape
@@ -83,10 +86,21 @@ def run_test():
                 image=imresize(image, (2**10, 2**10), interp='bilinear')
             signal=image.flatten() #interprete the image as a 1d signal
             signal=signal[0:1048576]
-            sct=tree_database.prop_1d_filters
-            sct.transform(signal)
+            sct=tree_database.var_1d_filters
+            out=sct.transform(signal)
+            energies=out['energies']
+            amount_of_props=out['amount']
+            size_of_props=out['size']
+            print_energy(energies,amount_of_props,size_of_props)
         else:
             raise ValueError('The dimension must be either 1 or 2!')
+
+def print_energy(e, amount,size):
+    i=0
+    print('Propagation protocol:')
+    for e in e:
+        print('level ',i,': - Energy:', e, ', Amount of signals:', int(amount[i]), ' Signal size:', int(size[i]))
+        i+=1
 
 def run_mnist():
     sct = tree_database.larger_tree
@@ -106,6 +120,10 @@ def run_mnist():
         scattered_training_output = Parallel(n_jobs=n_jobs, verbose=verbose)(delayed(sct.transform)(inp) for inp in training_input)
     else:
         scattered_training_output = [sct.transform(x) for x in training_input]
+        energies=scattered_training_output[0]['energies']
+        amount_of_props=scattered_training_output[0]['amount']
+        size_of_props=scattered_training_output[0]['size']
+        print_energy(energies,amount_of_props,size_of_props)
 
     
 if __name__ == '__main__':

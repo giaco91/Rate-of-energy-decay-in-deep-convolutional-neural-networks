@@ -77,7 +77,6 @@ def _swt1(signal, meta, wavelet, level=1, start_level=0, frequency_decreasing_pa
     """
 
     tf = pywt.swt(signal, pywt.Wavelet(wavelet), level=level, start_level=start_level)
-
     """
         tf = [(cAn, cDn), ..., (cA2, cD2), (cA1, cD1)]
     """

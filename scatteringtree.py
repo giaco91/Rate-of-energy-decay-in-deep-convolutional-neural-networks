@@ -33,7 +33,10 @@ class scattering_tree:
         Complex values get splittet into their real and imaginary part.
         """
         
-        return _flatten(self.scatter(signal))
+        #return _flatten(self.scatter(signal))
+
+        #--we dont need the ouput
+        return self.scatter(signal)
         
     def transform(self, X):
         """Apply the scattering transform on X.
@@ -52,7 +55,7 @@ def _flatten(scattered):
     """Convert multi dimensional signals into a single one dimensional vector.
     Complex values get splittet into their real and imaginary part.
     """
-    
+ 
     flat = [s.flatten() for s in scattered]
     flat = _split_complex(flat)
     if flat==[]:
@@ -80,13 +83,21 @@ def _scatter(signal, propagation_filters, nonlinearities, poolings):
     meta = [None]*len(nodes)
     #scatter the tree up to second last layer
     #len(propagation_filters) must equal the amount of levels
-    energies=np.zeros(len(propagation_filters))
+    energies=np.zeros(len(propagation_filters)+1)
+    energies[0]=get_squared_norm(signal)
+    amount_of_props=np.zeros(len(propagation_filters)+1)
+    amount_of_props[0]=1
+    size_of_props=np.zeros(len(propagation_filters)+1)
+    size_of_props[0]=len(signal)
+
     i=0
     for prop_filters, nl, pooling in zip_longest(propagation_filters, nonlinearities, poolings):
         next_nodes = []
         next_meta = []
         # scatter each node on that level
         e=0
+        amount=0
+        size=0
         for n, m in zip(nodes, meta):
             sc = scatter_single_node(n, prop_filters, nl, pooling, meta=m)
             #sc is a dictionary with keys: prop,out,meta
@@ -94,14 +105,19 @@ def _scatter(signal, propagation_filters, nonlinearities, poolings):
             output.extend(sc['out'])
             next_nodes.extend(sc['prop'])#das sind die propagierten signale
             e+=get_energy(sc['prop'])
+            amount+=1
+            size=len(sc['prop'][0])
             next_meta.extend(sc['meta'])
-        energies[i]=e
+        energies[i+1]=e
+        amount_of_props[i+1]=amount
+        size_of_props[i+1]=size
         nodes = next_nodes
         meta = next_meta
         i+=1   
-    print_energy(energies)
+    #print_energy(energies,amount_of_props,size_of_props)
     output = _split_complex(output)
-    return output
+    return {'output': output, 'energies': energies, 'amount': amount_of_props, 'size': size_of_props}
+    #return output
 
 def _split_complex(arr):
     """Split complex arrays into their real and imaginary part.
@@ -176,7 +192,6 @@ def scatter_single_node(signal, propagation_filters, nonlinearity, pooling, meta
                 filtered.extend(res['prop'])
                 if 'out' in res:
                     output.extend(res['out'])
-                
                 """
                 Store meta data if filter provides it.
                 """
@@ -194,6 +209,7 @@ def scatter_single_node(signal, propagation_filters, nonlinearity, pooling, meta
     
     # Something has gone wrong if this does not hold:
     assert(len(filtered) == len(new_meta));
+
     
     
     if nonlinearity is not None:
@@ -217,16 +233,17 @@ def get_energy(signals):
 
 def get_squared_norm(signal):
     #must be an array of any dimension
-    signal=signal.flatten() 
-    signal=np.power(np.absolute(signal),2)
+    signal=np.absolute(signal)
+    signal=signal.flatten().astype(float)
+    signal=np.power(signal,2)
     e=np.sum(signal)
     return e 
 
-def print_energy(e):
+def print_energy(e, amount,size):
     i=0
-    print('Total propagated energy at:')
+    print('Propagation protocol:')
     for e in e:
-        print('level ',i+1,': ', e)
+        print('level ',i,': - Energy:', e, ', Amount of signals:', int(amount[i]), ' Signal size:', int(size[i]))
         i+=1
 
 

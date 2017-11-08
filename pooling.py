@@ -113,13 +113,20 @@ class subsample_pooling:
 
         """
         s = self._sample_size
-        
-        if len(s)==2:
-            #signal is 2D
-            result = signal[::s[0],::s[1]]
-        else:
-            #signal is 1D
+
+        if type(s)==int:
+            #print('signal is 1D')
             result = signal[::s]
+        else:
+            #print('signal is 2D')
+            result = signal[::s[0],::s[1]]           
+
+        # if len(s)==2:
+        #     #signal is 2D
+        #     result = signal[::s[0],::s[1]]
+        # else:
+        #     #signal is 1D
+        #     result = signal[::s]
 
         return result
 
