@@ -17,7 +17,7 @@ The user can pass any image of any size, choose, whether it should be interprete
 You can simply run the code e.g. from your terminal:
 ```$ python main.py ```
 
-By default, an image of the MNIST dataset is used, interpreted as a 2d-signal and scattered over 5 layers of a mixture of filters. However, you can pass three arguments as described above:
+By default, an image of the MNIST dataset is used, interpreted as a 2d-signal and scattered over 5 layers of a mixture of filters. The propagated signals go through a rectified linear unit non-linearity and a max-pooling. However, you can pass three arguments as described above:
   1. Path to your image you want to propagate
   
   2. Pass ``` 1 ``` or ``` 2 ``` for an interpretation of the image as a 1d- or 2d-signal.
@@ -56,7 +56,7 @@ level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
 ## Run 1dDecay.py
 
-Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only on the positive or on the negative frequencies. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one image is scattered. The highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
+Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only on the positive or on the negative frequencies. We have a modulus non-linearity and no pooling. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one image is scattered. The highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
 
 ```$ python 1dDecay.py ```
 
