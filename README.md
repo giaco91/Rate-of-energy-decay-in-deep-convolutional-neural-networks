@@ -63,7 +63,7 @@ Here we focuse on the 1d case. The filters are a normalized dyadic set of highpa
 There are 3 additional arguments that can be passed: 
 
 1. Integer: How many images do you want to scatter? The output energies at each level will be averaged over the images.
-2. Integer {2,6,18}: How many dyadic filters do you want to have at each node? Note that the calculation time scales like: layers^filters. Usually, running out of RAM will be the bigger issue here.
+2. Integer {2,6,18}: How many dyadic filters do you want to have at each node? Note that the calculation time scales like: filters^layers. Usually, running out of RAM will be the bigger issue here.
 3. Integer: How many layers do you want?
 
 ### Example input:
