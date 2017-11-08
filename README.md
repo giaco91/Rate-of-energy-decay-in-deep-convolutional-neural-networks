@@ -68,7 +68,7 @@ There are 3 additional arguments that can be passed:
 
 ### Example input:
 
-```$ python 1dDecay.py 1 2 12```
+```$ python 1dDecay.py 10 2 11```
 
 ### Example output: 
 
@@ -78,33 +78,33 @@ Resample input images...
 
 Scattering training data...
 
+10  signals have been propagated.
+
 Propagation protocol:
 
 level  0 : - Energy: 1.0 , Amount of signals: 1  Signal size: 1024
 
-level  1 : - Energy: 0.769815037651 , Amount of signals: 1  Signal size: 1024
+level  1 : - Energy: 0.735343092132 , Amount of signals: 1  Signal size: 1024
 
-level  2 : - Energy: 0.253511065519 , Amount of signals: 2  Signal size: 1024
+level  2 : - Energy: 0.213223037069 , Amount of signals: 2  Signal size: 1024
 
-level  3 : - Energy: 0.0505692146992 , Amount of signals: 4  Signal size: 1024
+level  3 : - Energy: 0.0397570346769 , Amount of signals: 4  Signal size: 1024
 
-level  4 : - Energy: 0.0115112377848 , Amount of signals: 8  Signal size: 1024
+level  4 : - Energy: 0.00906225226072 , Amount of signals: 8  Signal size: 1024
 
-level  5 : - Energy: 0.00283803012423 , Amount of signals: 16  Signal size: 1024
+level  5 : - Energy: 0.00215886029644 , Amount of signals: 16  Signal size: 1024
 
-level  6 : - Energy: 0.000700570824353 , Amount of signals: 32  Signal size: 1024
+level  6 : - Energy: 0.000543186514969 , Amount of signals: 32  Signal size: 1024
 
-level  7 : - Energy: 0.00019026260348 , Amount of signals: 64  Signal size: 1024
+level  7 : - Energy: 0.000150559301693 , Amount of signals: 64  Signal size: 1024
 
-level  8 : - Energy: 5.52663058142e-05 , Amount of signals: 128  Signal size: 1024
+level  8 : - Energy: 4.6091346008e-05 , Amount of signals: 128  Signal size: 1024
 
-level  9 : - Energy: 1.71797809072e-05 , Amount of signals: 256  Signal size: 1024
+level  9 : - Energy: 1.51196190117e-05 , Amount of signals: 256  Signal size: 1024
 
-level  10 : - Energy: 5.60584058256e-06 , Amount of signals: 512  Signal size: 1024
+level  10 : - Energy: 5.19660288051e-06 , Amount of signals: 512  Signal size: 1024
 
-level  11 : - Energy: 1.92109743184e-06 , Amount of signals: 1024  Signal size: 1024
-
-level  12 : - Energy: 6.7801059352e-07 , Amount of signals: 2048  Signal size: 1024
+level  11 : - Energy: 1.81654108378e-06 , Amount of signals: 1024  Signal size: 1024
 
 
 
