@@ -14,17 +14,18 @@ Make sure you have preinstalled the following:
 
 The user can pass any image of any size, choose, whether it should be interpreted as a 1-d or a 2-d signal, and finally decide how many layers are desired.
   
-Then you can simply run the code e.g. from your terminal:
+You can simply run the code e.g. from your terminal:
 ```$ python main.py ```
 
-By default, an image of the MNIST dataset is used, interpreted as a 2d-signal and scattered over 10 layers. However, you can pass three arguments as described above:
+By default, an image of the MNIST dataset is used, interpreted as a 2d-signal and scattered over 5 layers of a mixture of filters. However, you can pass three arguments as described above:
   1. Path to your image you want to propagate
   
   2. Pass ``` 1 ``` or ``` 2 ``` for an interpretation of the image as a 1d- or 2d-signal.
   
   3. Pass any number from ``` 1 ``` to ``` 20 ``` to choose the amount of layers.
   
-Note that the order of the arguments is important and that you can pass either all arguments or none.
+Note that the order of the arguments is important and that you can pass either all arguments or none. The used filters are stationary wavelets in 1d and Gabor wavelets in the 2d case.
+
 Example input:
 
 ```$ python main.py image.jpg 1 8```
@@ -33,22 +34,24 @@ Example output:
 
 `preprocessing your signal in 1-dimension...
 
-Total propagated energy at:
+Propagation protocol:
 
-level  1 :  552907215.611
+level  0 : Energy: 25861707617.3  Amount of signals: 1  Signal size: 1048576
 
-level  2 :  153676110.639
+level  1 : Energy: 1280520894.14  Amount of signals: 1  Signal size: 524288
 
-level  3 :  37964433.8056
+level  2 : Energy: 673823174.618  Amount of signals: 2  Signal size: 262144
 
-level  4 :  8962932.84722
+level  3 : Energy: 324803150.41  Amount of signals: 4  Signal size: 131072
 
-level  5 :  2214675.10764
+level  4 : Energy: 152369874.5  Amount of signals: 8  Signal size: 65536
 
-level  6 :  547426.286458
+level  5 : Energy: 72621136.4797  Amount of signals: 16  Signal size: 32768
 
-level  7 :  142753.263021
+level  6 : Energy: 34961046.2309  Amount of signals: 32  Signal size: 16384
 
-level  8 :  34595.3559028`
+level  7 : Energy: 16437425.9316  Amount of signals: 64  Signal size: 8192
+
+level  8 : Energy: 7385179.14625  Amount of signals: 128  Signal size: 4096`
 
 
