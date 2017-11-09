@@ -56,7 +56,7 @@ level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
 ## Run 1dDecay.py
 
-Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only on the positive or on the negative frequencies. We have a modulus non-linearity and no pooling. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one image is scattered. The highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
+Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only on the positive or on the negative frequencies. We have a modulus non-linearity and no pooling. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one image is scattered and the highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
 
 ```$ python 1dDecay.py ```
 
