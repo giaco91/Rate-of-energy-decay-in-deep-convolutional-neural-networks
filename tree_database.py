@@ -2,6 +2,7 @@ from filters.gabortsfm import gabortsfm
 from filters.gwt import gwt
 from filters.swt import swt1
 from filters.swt import swt2
+from filters.raised_cosine import rc
 from filters.dyadic_highpass import dh
 from filters.helper import OutputAllFilter
 from pooling import pooling, subsample_pooling
@@ -11,19 +12,22 @@ import sys
 
 from scatteringtree import scattering_tree
 m=9
-n=10
+n=7
+omega=np.pi*2/512
 if len(sys.argv)>1:
     n=int(sys.argv[3])
-    m=int(sys.argv[2])
-    if m==2:
-        m=9
-    elif m==6: 
-        m=3
-    elif m==18:
-        m=1
-    elif sys.argv[0]!='main.py':
-        raise ValueError('The scale (second argument) must be an element of {2,6,9}!')
-
+    if sys.argv[0]=='1d_NoOverlap_dyadic.py':
+        m=int(sys.argv[2])
+        if m==2:
+            m=9
+        elif m==6: 
+            m=3
+        elif m==18:
+            m=1
+        elif sys.argv[0]!='main.py':
+            raise ValueError('The scale (second argument) must be an element of {2,6,18}!')
+    elif sys.argv[0]=='1d_Overlap_raisedCosines.py':
+        omega=omega*float(sys.argv[2])
 
 def get_n2d_filters():
     filter_list=[]
@@ -42,6 +46,12 @@ def get_simple_1d_filters():
     for i in range(n):
         #scale can be an element of {1,3,9} in order to span the complete highpass space
         filter_list.append([dh(scale=m)])
+    return filter_list
+
+def get_raised_cosine_filters():
+    filter_list=[]
+    for i in range(n):
+        filter_list.append([rc(omega=omega)])
     return filter_list
 
 def get_n2d_poolings():
@@ -158,6 +168,11 @@ var_2d_filters = scattering_tree(
         )
 simple_1d_filters = scattering_tree(
                 get_simple_1d_filters(),
+                [nl.modulus]*n,
+                get_identity_poolings(),
+        )
+raised_cosine_filters = scattering_tree(
+                get_raised_cosine_filters(),
                 [nl.modulus]*n,
                 get_identity_poolings(),
         )
