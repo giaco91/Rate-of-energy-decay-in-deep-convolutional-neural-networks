@@ -54,11 +54,11 @@ level  7 : - Energy: 16437425.9316 , Amount of signals: 64 , Signal size: 8192
 
 level  8 : - Energy: 7385179.14625 , Amount of signals: 128 , Signal size: 4096
 
-## Run 1dDecay.py
+## Run 1d_NoOverlap_dyadic.py
 
 Here we focuse on the 1d case. The filters are a normalized dyadic set of highpass filters that completely span the highpass regime. They are supported either only on the positive or on the negative frequencies. We have a modulus non-linearity and no pooling. The input signals are unrolled MNIST digit images of size 32*32=1024. By default only one image is scattered and the highpass filters are two ideal high pass filters, one for the positive and one for the negative frequencies. You can run the file in your terminal: 
 
-```$ python 1dDecay.py ```
+```$ python 1d_NoOverlap_dyadic.py ```
 
 There are 3 additional arguments that can be passed: 
 
@@ -68,7 +68,7 @@ There are 3 additional arguments that can be passed:
 
 ### Example input:
 
-```$ python 1dDecay.py 10 2 11```
+```$ python 1d_NoOverlap_dyadic.py 10 2 11```
 
 ### Example output: 
 
@@ -106,5 +106,18 @@ level  10 : - Energy: 5.19660288051e-06 , Amount of signals: 512  Signal size: 1
 
 level  11 : - Energy: 1.81654108378e-06 , Amount of signals: 1024  Signal size: 1024
 
+## Run 1d_Overlap_raisedCosines.py
 
+The highpass filters are four square-rooted raised cosines, two for the negative and two for the positive axis. They have a 180 degree phase difference, such that their squar-roots add up to one for each frequency. You can run the file in your terminal: 
 
+```$ python 1d_Overlap_raisedCosines.py ```
+
+There are 3 additional arguments that can be passed: 
+
+1. Integer: How many images do you want to scatter? The output energies at each level will be averaged over the images.
+2. float: The normalized angular frequency of the raised cosines, that is, w = argument * 2*pi/512. By default this second argument is set to one.
+3. Integer: How many layers do you want?
+
+### Example input:
+
+```$ python 1d_Overlap_raisedCosines.py 10 2 8```
