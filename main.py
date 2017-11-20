@@ -9,7 +9,8 @@ from sklearn import svm
 from sklearn.datasets import fetch_mldata
 from sklearn.decomposition import PCA, IncrementalPCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from scipy.misc import imresize, imread
+#from scipy.misc import imresize, imread
+import scipy.misc
 
 
 #pyscatter libraries
@@ -52,7 +53,7 @@ def mnist_to_img(data):
     """bring data into square format with dimension being a power of 2"""
     #data is a 1d array of size 784=28*28
     img_small = data.reshape((28,28))
-    return imresize(img_small, (64, 64), interp='bilinear')
+    return scipy.misc.imresize(img_small, (64, 64), interp='bilinear')
 
 
 
@@ -66,12 +67,12 @@ def run_test():
         print('Your first argument is not a path to a valid file. Using an image from the MNIST dataset.')
         run_mnist()  
     else:
-        image = imread(sys.argv[1])
+        image = scipy.misc.imread(sys.argv[1])
         image=np.average(image, axis=2)
         size=2**int(sys.argv[3])
         if int(sys.argv[2])==2:
             print('preprocessing your signal in 2-dimension...')
-            image = imresize(image, (size, size), interp='bilinear')
+            image = scipy.misc.imresize(image, (size, size), interp='bilinear')
             print('Scattering training data...')
             sct = tree_database.var_2d_filters
             out=sct.transform(image)
@@ -83,7 +84,7 @@ def run_test():
             print('preprocessing your signal in 1-dimension...')
             shape=image.shape
             if shape[0]*shape[1]<2**20:
-                image=imresize(image, (2**10, 2**10), interp='bilinear')
+                image=scipy.misc.imresize(image, (2**10, 2**10), interp='bilinear')
             signal=image.flatten() #interprete the image as a 1d signal
             signal=signal[0:1048576]
             sct=tree_database.var_1d_filters
