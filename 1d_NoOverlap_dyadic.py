@@ -9,7 +9,8 @@ from sklearn import svm
 from sklearn.datasets import fetch_mldata
 from sklearn.decomposition import PCA, IncrementalPCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from scipy.misc import imresize, imread
+#from scipy.misc import imresize, imread
+import scipy.misc
 
 
 #pyscatter libraries
@@ -50,7 +51,7 @@ def get_squared_norm(signal):
 def mnist_to_img(data):
     #data is a 1d array of size 784=28*28
     img_small = data.reshape((28,28))
-    resized = imresize(img_small, (32, 32), interp='bilinear')
+    resized = scipy.misc.imresize(img_small, (32, 32), interp='bilinear')
     flattened = resized.flatten()
     flattened = flattened/(get_squared_norm(flattened)**(1/2))
     return flattened
