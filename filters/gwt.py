@@ -1,7 +1,7 @@
 #coding: utf-8
 import numpy as np
 import matplotlib.pyplot as plt
-from skimage.io import imshow, show
+#from skimage.io import imshow, show
 import matplotlib.pyplot as plt
 from inspect import isfunction
 
@@ -173,21 +173,21 @@ def _gwt(img, meta, num_scales, num_rotations, phi_filter, psi_filter_bank, out_
     return {'prop': prop, 'out': out, 'meta': new_meta}
 
 
-if __name__ == '__main__':
-    """
-    Plot gabor filter bank.
-    """
-    
-    tf = gwt(num_scales=4, num_rotations=4, filter_num_rows=128, filter_num_columns=128)
-
-    psifilters = [val for one_filter_bank in tf._psi_filter_bank for val in one_filter_bank]
-    phifilter = np.reshape(tf._phi_filter,(len(tf._phi_filter),len(tf._phi_filter)))
-    fig, axes = plt.subplots(4, 4, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
-    fig.subplots_adjust(hspace=0.25, wspace=0.25)
-
-    for ax, s in zip(axes.flat, psifilters):
-        im = ax.imshow(s, interpolation='nearest')
-    plt.show()
+##if __name__ == '__main__':
+##    """
+##    Plot gabor filter bank.
+##    """
+##    
+##    tf = gwt(num_scales=4, num_rotations=4, filter_num_rows=128, filter_num_columns=128)
+##
+##    psifilters = [val for one_filter_bank in tf._psi_filter_bank for val in one_filter_bank]
+##    phifilter = np.reshape(tf._phi_filter,(len(tf._phi_filter),len(tf._phi_filter)))
+##    fig, axes = plt.subplots(4, 4, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
+##    fig.subplots_adjust(hspace=0.25, wspace=0.25)
+##
+##    for ax, s in zip(axes.flat, psifilters):
+##        im = ax.imshow(s, interpolation='nearest')
+##    plt.show()
 
 
 
