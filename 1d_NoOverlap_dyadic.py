@@ -56,9 +56,6 @@ def mnist_to_img(data):
     flattened = flattened/(get_squared_norm(flattened)**(1/2))
     return flattened
 
-def run_test():
-    run_mnist()
-
 def print_energy(e, amount,size):
     i=0
     print('Propagation protocol:')
@@ -94,6 +91,5 @@ def run_mnist():
     print_energy(energies,amount_of_props,size_of_props)
 
     
-if __name__ == '__main__':
-    #cProfile.run('run_test()')
-    run_test()
+
+run_mnist()
