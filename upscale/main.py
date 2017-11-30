@@ -7,16 +7,17 @@ from sklearn.datasets import fetch_mldata
 import scipy.misc
 
 
-
+filter = 'simple_highpass'
 num_train = 1
 num_layers= 10
 folder_name = 'outputs'
 #num_proc=1
 if len(sys.argv)>1:
-    num_train=int(sys.argv[1])
-    num_layers=int(sys.argv[2])
-    if len(sys.argv)>3:
-        folder_name=sys.argv[3]
+    filter = sys.argv[1]
+    num_train=int(sys.argv[2])
+    num_layers=int(sys.argv[3])
+    if len(sys.argv)>4:
+        folder_name=sys.argv[4]
 
 def get_squared_norm(signal):
     #must be an array of any dimension
@@ -60,23 +61,21 @@ def scatter(signal,support):
     #no pooling
     return scattered
 
-def propagation(signal,layer,support):
-    # if proc==1:
-    #     print('PROCESSOR IN PROPAGATION')
-    #     proc=0
-    # elif proc>=2: 
-    #     proc=proc/2
+def simple_highpass(signal,layer,support):
     f=scatter(signal,support)
     if layer==num_layers:
         energies=np.zeros(num_layers+1)
         energies[layer]+=get_squared_norm(f)
         return energies
     else:
-        energies=propagation(f,layer+1,1)+propagation(f,layer+1,-1)
+        energies=simple_highpass(f,layer+1,1)+simple_highpass(f,layer+1,-1)
         energies[layer]+=get_squared_norm(f)
         return energies
 
-
+def SIMPLE_HIGHPASS(energies, training_input):
+    for i in range(0,num_train):
+        energies[0,i]+=get_squared_norm(training_input[i])
+        energies[:,i] += simple_highpass(training_input[i],1,1) + simple_highpass(training_input[i],1,-1)
 
 def run_mnist():
     #set up scattering tree
@@ -97,17 +96,10 @@ def run_mnist():
 
     energies=np.zeros((num_layers+1,num_train))
     print('Scattering training data...')
-    #processor analysis
-    #num_processors=num_proc
-    #num_proc_per_prop=2**np.floor(np.log2(num_processors/num_train))
-    #print('processors per input',num_proc_per_prop)
-    #num_processors=num_train*num_proc_per_prop
-    #print('processors needed',num_processors)
     t0 = time.time()
     print('timer started')
-    for i in range(0,num_train):
-        energies[0,i]+=get_squared_norm(training_input[i])
-        energies[:,i] += propagation(training_input[i],1,1) + propagation(training_input[i],1,-1)
+
+    SIMPLE_HIGHPASS(energies,training_input)
 
     averaged_energies=np.average(energies,axis=1)
     print_energy(averaged_energies)
@@ -115,6 +107,6 @@ def run_mnist():
     print('Runtime: ',duration, 'sec')
 
     #np.savetxt(folder_name + '/generated/l=' + str(cost) + '.csv', np.round(samples, decimals=3), delimiter=',')
-    np.savetxt(folder_name + '/simple_highpass'+str(num_layers)+'.txt', averaged_energies, delimiter=',')
+    np.savetxt(folder_name + '/' + filter +'_tr='+str(num_train)+'_lay='+str(num_layers)+'.txt', averaged_energies, delimiter=',')
     
 run_mnist()
