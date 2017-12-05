@@ -29,6 +29,7 @@ Fetching MNIST dataset...
 Resample input images...  
 Scattering training data...  
 timer started  
+----------------------------------------------------  
 Propagation protocol:  
 level  0 : - Energy: 1.0  
 level  1 : - Energy: 0.785147470486  
@@ -37,5 +38,6 @@ level  3 : - Energy: 0.0402560453871
 level  4 : - Energy: 0.00708757840821  
 level  5 : - Energy: 0.00193679235587  
 level  6 : - Energy: 0.000550525690997  
+----------------------------------------------------  
 Runtime:  1.04121994972229 sec  
 Energy stored in:  outputs/raised_cosine_inp=2_lay=6.txt
