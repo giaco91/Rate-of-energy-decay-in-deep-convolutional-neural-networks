@@ -1,6 +1,7 @@
 import numpy as np
 import time
 import sys
+import os
 
 from sklearn.datasets import fetch_mldata
 
@@ -22,6 +23,9 @@ if len(sys.argv)>1:
             if len(sys.argv)>4:
                 folder_name=sys.argv[4]
 
+if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
+
 
 
 def mnist_to_img(data):
@@ -29,13 +33,15 @@ def mnist_to_img(data):
     img_small = data.reshape((28,28))
     resized = scipy.misc.imresize(img_small, (32, 32), interp='bilinear')
     flattened = resized.flatten()
-    flattened = flattened/(get_squared_norm(flattened)**(1/2))
+    #make signal length uneven
+    z=np.zeros(1025)
+    z[0:1024]=flattened
+    flattened = z/(get_squared_norm(z)**(1/2))
     return flattened
 
 def get_squared_norm(signal):
     signal=np.absolute(signal)
     signal=signal.flatten().astype(float)
-    #signal=np.absolute(signal)
     signal=np.power(signal,2)
     e=np.sum(signal)
     return e
@@ -50,6 +56,8 @@ def get_filters(filter_type):
         return Simple_highpass()
     if filter_type=='raised_cosine':
         return Raised_cosine()
+    if filter_type=='wavelet_rect':
+        return Wavelet_rect()
     else:
         raise ValueError('The filtertype "' + filter_type + '" is not defined!')
 
@@ -74,7 +82,6 @@ def run_mnist():
 
     filters=get_filters(filter_type)
     net=Convnet(filters,num_layers)
-
     energies=net.scatter(inputs)
 
     averaged_energies=np.average(energies,axis=1)
@@ -86,6 +93,8 @@ def run_mnist():
     np.savetxt(folder_name + '/' + filter_type +'_tr='+str(num_inputs)+'_lay='+str(num_layers)+'.txt', averaged_energies, delimiter=',')  
     print('Energy stored in: ', folder_name + '/' + filter_type +'_inp='+str(num_inputs)+'_lay='+str(num_layers)+'.txt')
     
+
+
 run_mnist()
  
 
