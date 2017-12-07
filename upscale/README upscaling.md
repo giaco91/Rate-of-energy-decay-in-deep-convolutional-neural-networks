@@ -8,7 +8,7 @@ Here we focus on the one dimensional case and a set of pairwise symmetric filter
 
 Additional arguments:
 
-1. Cho0se a set of filters (default: simple_highpass). Possible arguments are:
+1. Choose a set of filters (default: simple_highpass). Possible arguments are:
 - simple_highpass
 - raised_cosine
 - wavelet_rect
