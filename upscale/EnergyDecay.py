@@ -93,9 +93,9 @@ def run_mnist():
     duration=time.time()-t0
     print('Runtime: ',duration, 'sec')
 
-    #np.savetxt(folder_name + '/generated/l=' + str(cost) + '.csv', np.round(samples, decimals=3), delimiter=',')
-    np.savetxt(folder_name + '/' + filter_type +'_tr='+str(num_inputs)+'_lay='+str(num_layers)+'.txt', averaged_energies, delimiter=',')  
-    print('Energy stored in: ', folder_name + '/' + filter_type +'_inp='+str(num_inputs)+'_lay='+str(num_layers)+'.txt')
+    path=folder_name + '/' + filter_type +'_tr='+str(num_inputs)+'_lay='+str(num_layers)+'.csv'
+    np.savetxt(path, averaged_energies, delimiter=',')  
+    print('Energy stored in: ', path)
     
 
 
