@@ -47,9 +47,11 @@ def get_squared_norm(signal):
     return e
 
 def print_energy(energies):
+    print('----------------------------------------------------')
     print('Propagation protocol:')
     for i in range(0,len(energies)):
         print('level ',i,': - Energy:', energies[i])
+    print('----------------------------------------------------')
 
 def get_filters(filter_type):
     if filter_type=='simple_highpass':
@@ -58,6 +60,8 @@ def get_filters(filter_type):
         return Raised_cosine()
     if filter_type=='wavelet_rect':
         return Wavelet_rect()
+    if filter_type=='stochastic':
+        return Stochastic()
     else:
         raise ValueError('The filtertype "' + filter_type + '" is not defined!')
 

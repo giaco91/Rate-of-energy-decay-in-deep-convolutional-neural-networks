@@ -30,15 +30,16 @@ class Filter_types():
 				energies+=feedback[0]+self.rec(None,layer+1,num_layers,None,num_filters,feedback[1],feedback[2])[0]
 			return [energies, f, energy]
 
+	def apply_filter(self,fft_signal,filter_index):
+		return np.multiply(fft_signal,self.filters[filter_index])
 
-#The filters as child classes
+#The filters are child classes
 class Simple_highpass(Filter_types):
 
 	def __init__(self):
 		Filter_types.__init__(self,'simple_highpass')
 		self.num_filters=1
 
-	#filteres in frequency domain
 	def apply_filter(self,fft_signal,filter_index):
 		fft_signal[0]=0
 		fft_signal[513:1025]=0
@@ -55,14 +56,8 @@ class Raised_cosine(Filter_types):
 		f1[0:513]=0
 		f2=((np.cos(omega*line + np.pi)+1)/2)**(1/2)
 		f2[0:513]=0
-		self.filter1=f1
-		self.filter2=f2
+		self.filters=np.array([f1,f2])
 
-	def apply_filter(self,fft_signal,filter_index):	
-		if filter_index==0:
-		    return np.multiply(fft_signal,self.filter1)
-		else:
-		    return np.multiply(fft_signal,self.filter2)
 
 class Wavelet_rect(Filter_types):
 
@@ -70,30 +65,44 @@ class Wavelet_rect(Filter_types):
 		Filter_types.__init__(self,'wavelet_rect')
 		self.num_filters=4
 		z=np.zeros(1025)
+		amplitude=1/np.sqrt(2)
 		f1=np.copy(z)
-		f1[1:26]=1/np.sqrt(2)
+		f1[1:26]=amplitude
 		f2=np.copy(z)
-		f2[6:126]=1/np.sqrt(2)
+		f2[6:126]=amplitude
 		f3=np.copy(z)
-		f3[26:513]=1/np.sqrt(2)
+		f3[26:513]=amplitude
 		f4=np.copy(z)
-		f4[126:513]=1/np.sqrt(2)
-		self.filter1=f1
-		self.filter2=f2
-		self.filter3=f3
-		self.filter4=f4
+		f4[126:513]=amplitude
+		self.filters=np.array([f1,f2,f3,f4])
 
-	def apply_filter(self,fft_signal,filter_index):
-		#r=5
-		if filter_index==0:
-			return np.multiply(fft_signal,self.filter1)
-		elif filter_index==1:
-			return np.multiply(fft_signal,self.filter2)			
-		elif filter_index==2:
-			return np.multiply(fft_signal,self.filter3)			
-		else:
-			return np.multiply(fft_signal,self.filter4)			
-		
+
+class Stochastic(Filter_types):
+
+	def __init__(self):
+		Filter_types.__init__(self,'stochastic')
+		self.num_filters=4
+		x1=np.random.randint(2,511)
+		x2=np.random.randint(1,x1+1)
+		x3=np.random.randint(x1,512)	
+		self.x1=x1
+		self.x2=x2
+		self.x3=x3
+		print('Filterbonds: ')
+		print('x1:',x1)
+		print('x2:',x2)
+		print('x3:',x3)
+		z=np.zeros(1025)
+		amplitude=1/np.sqrt(2)
+		f1=np.copy(z)
+		f1[1:x1+1]=amplitude
+		f2=np.copy(z)
+		f2[x2:x3+1]=amplitude
+		f3=np.copy(z)
+		f3[x1:513]=amplitude
+		f4=np.copy(z)
+		f4[x3:513]=amplitude
+		self.filters=np.array([f1,f2,f3,f4])
 
 
 
