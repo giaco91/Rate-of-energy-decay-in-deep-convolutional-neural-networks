@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 class Convnet():
 
@@ -7,6 +8,7 @@ class Convnet():
         self.num_layers=num_layers
 
     def scatter(self,inputs):
+        t0 = time.time()
         num_inputs=len(inputs)
         energies=np.zeros((self.num_layers+1,num_inputs))
         num_filters=self.filters.num_filters
@@ -14,6 +16,7 @@ class Convnet():
             energies[0,i]=self.filters.get_squared_norm(inputs[i])
             for k in range(0,num_filters):
                 feedback=self.filters.rec(inputs[i],1,self.num_layers,k,num_filters,False,None)
+                print('finished first halve of the scattering after: ', time.time()-t0, ' seconds.')
                 energies[:,i] += feedback[0]+self.filters.rec(None,1,self.num_layers,None,num_filters,feedback[1],feedback[2])[0]
         return energies
 

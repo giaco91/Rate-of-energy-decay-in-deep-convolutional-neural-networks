@@ -88,7 +88,7 @@ class Stochastic(Filter_types):
 		self.x1=x1
 		self.x2=x2
 		self.x3=x3
-		print('Filterbonds: ')
+		print('Filter-bonds: ')
 		print('x1:',x1)
 		print('x2:',x2)
 		print('x3:',x3)
