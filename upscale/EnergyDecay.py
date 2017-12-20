@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import time
 import sys
 import os
@@ -6,6 +7,7 @@ import os
 from sklearn.datasets import fetch_mldata
 
 import scipy.misc
+from scipy import stats
 from Convnet import Convnet
 from Filter_types import *
 
@@ -65,6 +67,16 @@ def get_filters(filter_type):
     else:
         raise ValueError('The filtertype "' + filter_type + '" is not defined!')
 
+def plt_decay(energies):
+    t = np.arange(0, num_layers+1, 1)
+    slope, intercept, r_value, p_value, std_err = stats.linregress(t,np.log(energies))
+    plt.xlabel('layer')
+    plt.ylabel('log(energy)')
+    plt.title('Energy Decay over the layers')
+    plt.text(0.5*num_layers, -1, 'slope='+str(slope))
+    plt.plot(t, np.log(energies), 'r--')
+    plt.show()
+
 def run_mnist():
     print('Filter: ', filter_type)
     print('Number of inputs: ', num_inputs)
@@ -74,7 +86,7 @@ def run_mnist():
     print('Fetching MNIST dataset...')
     mnist = fetch_mldata('MNIST original', data_home= './mnist_dataset')
     images = mnist.data
-    inputs = images[0:num_inputs]
+    inputs = images[1:num_inputs+1]
          
     #Convert to 1024 pixel 1-d array and norm to unity energy
     print('Resample input images...')
@@ -89,15 +101,20 @@ def run_mnist():
     energies=net.scatter(inputs)
 
     averaged_energies=np.average(energies,axis=1)
+
     print_energy(averaged_energies)
     duration=time.time()-t0
     print('Runtime: ',duration, 'sec')
 
-    path=folder_name + '/' + filter_type +'_tr='+str(num_inputs)+'_lay='+str(num_layers)+'.csv'
+    filter_name=filter_type
+    if filter_name=='stochastic':
+        filter_name=filter_name+'_'+str(filters.x1)+'_'+str(filters.x2)+'_'+str(filters.x3)
+
+    path=folder_name + '/' + filter_name +'_tr='+str(num_inputs)+'_lay='+str(num_layers)+'.csv'
     np.savetxt(path, averaged_energies, delimiter=',')  
     print('Energy stored in: ', path)
     
-
+    plt_decay(averaged_energies)
 
 run_mnist()
  
