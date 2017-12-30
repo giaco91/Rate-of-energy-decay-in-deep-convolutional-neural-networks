@@ -99,9 +99,9 @@ class Stochastic(Filter_types):
 		f2=np.copy(z)
 		f2[x2:x3+1]=amplitude
 		f3=np.copy(z)
-		f3[x1:513]=amplitude
+		f3[x1+1:513]=amplitude
 		f4=np.copy(z)
-		f4[x3:513]=amplitude
+		f4[x3+1:513]=amplitude
 		self.filters=np.array([f1,f2,f3,f4])
 
 
