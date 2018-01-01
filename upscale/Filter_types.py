@@ -82,8 +82,8 @@ class Stochastic(Filter_types):
 	def __init__(self):
 		Filter_types.__init__(self,'stochastic')
 		self.num_filters=4
-		x1=np.random.randint(2,511)
-		x2=np.random.randint(1,x1+1)
+		x1=np.random.randint(21,300)
+		x2=np.random.randint(20,x1+1)
 		x3=np.random.randint(x1,512)	
 		self.x1=x1
 		self.x2=x2
@@ -95,7 +95,7 @@ class Stochastic(Filter_types):
 		z=np.zeros(1025)
 		amplitude=1/np.sqrt(2)
 		f1=np.copy(z)
-		f1[1:x1+1]=amplitude
+		f1[20:x1+1]=amplitude
 		f2=np.copy(z)
 		f2[x2:x3+1]=amplitude
 		f3=np.copy(z)
